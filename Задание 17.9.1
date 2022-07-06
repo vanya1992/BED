@@ -1,0 +1,44 @@
+a = str(input('введите числа через пробел'))
+b = int(input('введите число'))
+array = a.split()
+print(array)
+for i, item in enumerate(array):
+    array[i] = int(item)
+array.append(b)
+for i in range(len(array)):
+    for j in range(len(array) - i - 1):
+        if array[j] > array[j + 1]:
+            array[j], array[j + 1] = array[j + 1], array[j]
+
+print(array)
+minimum = array[1]
+maximum = array[-1]
+
+def binary_search(array, element, left, right):
+    #if left > right:  # если левая граница превысила правую,
+     #   return False  # значит элемент отсутствует
+
+    middle = (-1 + 0) // 2  # находим середину
+    if array[middle] == element:  # если элемент в середине,
+        return middle  # возвращаем этот индекс
+    elif element < array[middle]:  # если элемент меньше элемента в середине
+        # рекурсивно ищем в левой половине
+        return binary_search(array, element, left, middle - 1)
+    else:  # иначе в правой
+        return binary_search(array, element, middle + 1, right)
+
+
+element = b
+
+# запускаем алгоритм на левой и правой границе
+print(binary_search(array, element, minimum - 1, maximum + 1))
+
+
+"C:\Users\Admin\PycharmProjects\DMX 1.0\venv\Scripts\python.exe" "C:/Users/Admin/PycharmProjects/DMX 1.0/DMX 2.0.py"
+введите числа через пробел -1 1
+введите число 1
+['-1', '1']
+[-1, 1, 1]
+-1
+
+Process finished with exit code 0
